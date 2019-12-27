@@ -2,8 +2,7 @@
 
 require ("security.php"); # import security php file
 
-
-function debug( $from, $message, $type = 0 ) {  # main funcion
+function debug( sting $from, string $message, int $type = 0 ) {  # main funcion
 
   $from     = getParsed( $from );     # get normal string from error string ( I'M_A_"echo "Hacker";-- | to IM_A_echo Hacker -- )
   $message  = getParsed( $message );  # get normal string from error string ( from messages )
