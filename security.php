@@ -46,15 +46,7 @@ class Security {
   }
 
   public function getMetadata( string $token ) { # get metadata from token
-    /*
-      TOKEN STRUCTURE:
-
-      time*name*password
-
-      time contains date of token
-      name contains login of user
-      password contains hashed user password
-    */
+    
     $array = explode( "*", base64_decode($token) ); // decode token and split to array *WARNING password is heshed!
 
     if ( !$this->parse( $array[0] ) || !$this->parce( $array[1] ) || !$this->parse( $array[2] ) ) {  # checking token for denied symbols
