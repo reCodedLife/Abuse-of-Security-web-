@@ -257,7 +257,46 @@ function clear ( string $table ) { # clear table function
     return; # stop script
   }
 
-  mysql_query( $connection, "delete * from $table" ); # exec query
+  mysql_query( $connection, "truncate table $table" ); # exec query
+
+}
+
+function createTable ( string $table, array $parameters ) { # creating table function
+
+  $params = ""; # init params string
+
+  if ( !parse( $table ) ) { # checking table name for denied symbols
+    debug( $lib, "Table name contains denied symbols", 2 ); # debug error
+    return; # stop script
+  }
+
+  if ( count( $parameters ) != 0 ) {  # checking parameters count
+    for( $i = 0; $i < count( $parameters ); $i++ ) {  # creating a cycle with paremrters count
+
+      if ( !parse( $parameters[$i] ) ) {  # checking patameters for denied symbols
+        debug( $lib, "Parameters value " . $parameters[$i] . " contain a denied symbol", 2 ); # debugg error
+        return; # stop script
+      }
+
+      $params . "\t" . $parameters[$i];                       # add parameter to string ( ... newTable (var varchar(100), ); )
+      if ( $i < ( count( $parameters ) - 1 ) ) $params . ","; # add "," if parameter is not last
+
+    }
+  } else {  # if count of parameters = 0
+    debug($lib, "You should set at least one parameters name and one parameter", 2 ); # debug a error
+    return; # stop script
+  }
+
+}
+
+function dropTable( string $table ) {
+
+  if ( !parse( $table ) ) { # checking table name for denied symbols
+    debug( $lib, "Table name contains denied symbols", 2 ); # debug error
+    return; # stop script
+  }
+
+  mysql_query( "drop table $table" ); # exec query
 
 }
 
