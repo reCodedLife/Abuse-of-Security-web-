@@ -10,7 +10,7 @@ $databaseName  = "";  # name of ypur table
 $connection = mysqli_connect( "localhost", $databaseLogin, $databasePass, $databaseName ); # connect to database
 $lib = "Databases";  # init lib name
 
-function select ( $what = array(), $table, $params = array(), $values = array() ) { # select function
+function select ( array $what = array(), string $table, array $params = array(), array $values = array() ) { # select function
 
   $items = "";  # init variable for sql requirements in select function ( SELECT var1, var2 ... FROM )
   $param = "where";  # init variable for sql parameters in select function ( WHERE var1 = "admin" and ... )
@@ -64,7 +64,7 @@ function select ( $what = array(), $table, $params = array(), $values = array() 
 
 }
 
-function insert ( $table, $valuesNames = array(), $values = array(), $parametersName = array(), $parameters = array() ) {  # insert function
+function insert ( string  $table, array $valuesNames = array(), array $values = array(), array $parametersName = array(), array $parameters = array() ) {  # insert function
 
   $valNames = "";     # init values names string
   $val = "";          # init values string
@@ -141,7 +141,7 @@ function insert ( $table, $valuesNames = array(), $values = array(), $parameters
   mysqli_query( $connection, "insert into $table ($valNames) values ($val) $params" ); # query exec
 }
 
-function remove ( $table, $parametersNames, $parameters ) { # remove function
+function remove ( string $table, array $parametersNames = array(), array $parameters = array() ) { # remove function
 
   $params = "where";  # init params string
 
@@ -181,7 +181,7 @@ function remove ( $table, $parametersNames, $parameters ) { # remove function
 
 }
 
-function update ( $table, $valuesNames = array(), $values = array(), $parametersName = array(), $parameters = array() ) { # update function
+function update ( string $table, array $valuesNames = array(), array $values = array(), array $parametersName = array(), array $parameters = array() ) { # update function
 
   $values = "";       # init values string
   $params = "where";  # init params string
@@ -250,7 +250,7 @@ function update ( $table, $valuesNames = array(), $values = array(), $parameters
 
 }
 
-function clear ( $table ) { # clear table function
+function clear ( string $table ) { # clear table function
 
   if ( !parse( $table ) ) { # checking table name for denied symbols
     debug( $lib, "Table name contains denied symbols", 2 ); # debug error
