@@ -244,6 +244,11 @@ function clear ( string $table ) { # clear table function
 
 function createTable ( string $table, obj $parameters ) { # creating table function
 
+  /*
+  This function use specific object structure:
+  [{"name" : "something", "type" : "varchar(256)"}]
+  */
+
   $params = ""; # init params string
 
   if ( !parse( $table ) ) { # checking table name for denied symbols
@@ -259,7 +264,7 @@ function createTable ( string $table, obj $parameters ) { # creating table funct
         return; # stop script
       }
 
-      $params . "\t" . $parameters[$i]["name"]; . "\t" . $parameters[$i]["type"]; # add parameter to string ( ... newTable (var varchar(100), ); )
+      $params . "\t" . $parameters[$i]["name"] . "\t" . $parameters[$i]["type"]; # add parameter to string ( ... newTable (var varchar(100), ); )
       if ( $i < ( count( $parameters ) - 1 ) ) $params . ",";                     # add "," if parameter is not last
 
     }
