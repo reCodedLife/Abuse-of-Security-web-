@@ -10,7 +10,7 @@ $databaseName  = "";  # name of ypur table
 $connection = mysqli_connect( "localhost", $databaseLogin, $databasePass, $databaseName ); # connect to database
 $lib = "Databases";  # init lib name
 
-function select ( $what = array(), $table, $params = array(), $values = array() ) { # select func
+function select ( $what = array(), $table, $params = array(), $values = array() ) { # select function
 
   $items = "";  # init variable for sql requirements in select function ( SELECT var1, var2 ... FROM )
   $param = "where";  # init variable for sql parameters in select function ( WHERE var1 = "admin" and ... )
@@ -33,9 +33,9 @@ function select ( $what = array(), $table, $params = array(), $values = array() 
         return; # stop script
       }
 
-      $items = $items . " ".$what[$i]."";  # adding item to string ( string + requriment item ) ( SELECT var(item), ... )
+      $items . " ".$what[$i]."";                          # adding item to string ( string + requriment item ) ( SELECT var(item), ... )
       if ( $i != ( count( $what ) - 1 ) ) $items . ", ";  # add "," if item not last
-      else $items = $items . " ";  # else add free space at end
+      else $items . " ";                                  # else add free space at end
 
     }
   } else $items = "*"; # if requirements items length = 0 set string = "*" ( SELECT * FROM ... )
@@ -53,18 +53,18 @@ function select ( $what = array(), $table, $params = array(), $values = array() 
         return; # stop script
       }
 
-      $param = $param . " ".$params[$i]." = " . $values[$i];  # adding parameter and value to string like ( string + parametr = value ) ( WHERE var1 = "admin" and ... )
-      if ( $i != ( count( $params ) - 1 ) ) $param = $param . " and";  # add "end" if item not last
+      $param . " ".$params[$i]." = " . $values[$i];           # adding parameter and value to string like ( string + parametr = value ) ( WHERE var1 = "admin" and ... )
+      if ( $i != ( count( $params ) - 1 ) ) $param . " and";  # add "end" if item not last
 
     }
-  } else $param = ""; # if params items length = 0 set string are empty ( SELECT ... FROM ... ) w/o WHERE func
+  } else $param = ""; # if params items length = 0 set string are empty ( SELECT ... FROM ... ) w/o WHERE function
 
   $reply = mysqli_query ( $connection, "select $items from $table $param" ); # exec query
   return mysqli_fetch_assoc( $reply );  # return responce
 
 }
 
-function insert ( $table, $valuesNames = array(), $values = array(), $parametersName = array(), $parameters = array() ) {  # insert func
+function insert ( $table, $valuesNames = array(), $values = array(), $parametersName = array(), $parameters = array() ) {  # insert function
 
   $valNames = "";     # init values names string
   $val = "";          # init values string
@@ -93,8 +93,8 @@ function insert ( $table, $valuesNames = array(), $values = array(), $parameters
         return; # stop script
       }
 
-      $valNames = $valNames . " `".$valuesNames[$i]."`";  # add names of parametrs to string ( INTO ... ( `val1`, `val2` ) )
-      if ( $i != ( count( $valuesNames ) = 1 ) ) $valNames = $valNames . ","; # add "," if name not last
+      $valNames . " `" . $valuesNames[$i] . "`";                  # add names of parametrs to string ( INTO ... ( `val1`, `val2` ) )
+      if ( $i != ( count( $valuesNames ) = 1 ) ) $valNames . ","; # add "," if name not last
 
     }
   } else {  # if names of values are empty
@@ -110,8 +110,8 @@ function insert ( $table, $valuesNames = array(), $values = array(), $parameters
         return; # stop script
       }
 
-      $val = $val . " \"".$values[$i]."\""; # adding value to string ( VALUES ("var", "var") ... )
-      if ( $i != ( count( $values ) - 1 ) ) $val = $val . ",";  # add "," if value not last
+      $val . " \"".$values[$i]."\"";                      # adding value to string ( VALUES ("var", "var") ... )
+      if ( $i != ( count( $values ) - 1 ) ) $val . ",";   # add "," if value not last
 
     }
   } else {  # if names of values are empty
@@ -132,8 +132,8 @@ function insert ( $table, $valuesNames = array(), $values = array(), $parameters
         return; # stop script
       }
 
-      $params = $params . " " . $parametersName[$i] . " = " . $parameters[$i];  # add names of parametrs to string ( INTO ... ( `val1`, `val2` ) )
-      if ( $i != ( count( $parametersName ) - 1 ) ) $params = $params . " and"; # add " and" if name is not last
+      $params . " " . $parametersName[$i] . " = " . $parameters[$i];  # add names of parametrs to string ( INTO ... ( `val1`, `val2` ) )
+      if ( $i != ( count( $parametersName ) - 1 ) ) $params . " and"; # add " and" if name is not last
 
     }
   } else $params = "";  # if parameters are empty set empty variable ( VALUES (...) ) w/o WHERE ...
@@ -141,7 +141,7 @@ function insert ( $table, $valuesNames = array(), $values = array(), $parameters
   mysqli_query( $connection, "insert into $table ($valNames) values ($val) $params" ); # query exec
 }
 
-function remove ( $table, $parametersNames, $parameters ) {
+function remove ( $table, $parametersNames, $parameters ) { # remove function
 
   $params = "where";  # init params string
 
@@ -168,8 +168,8 @@ function remove ( $table, $parametersNames, $parameters ) {
         return; # stop script
       }
 
-      $params = $params . " " . $parametersName[$i] . " = " . $parameters[$i];  # add names of parametrs to string ( INTO ... ( `val1`, `val2` ) )
-      if ( $i != ( count( $parametersName ) - 1 ) ) $params = $params . " and"; # add " and" if name is not last
+      $params . " " . $parametersName[$i] . " = " . $parameters[$i];  # add names of parametrs to string ( INTO ... ( `val1`, `val2` ) )
+      if ( $i != ( count( $parametersName ) - 1 ) ) $params . " and"; # add " and" if name is not last
 
     }
   } else {  # if parameters names count = 0
@@ -181,7 +181,7 @@ function remove ( $table, $parametersNames, $parameters ) {
 
 }
 
-function update ( $table, $valuesNames = array(), $values = array(), $parametersName = array(), $parameters = array() ) {
+function update ( $table, $valuesNames = array(), $values = array(), $parametersName = array(), $parameters = array() ) { # update function
 
   $values = "";       # init values string
   $params = "where";  # init params string
@@ -250,7 +250,7 @@ function update ( $table, $valuesNames = array(), $values = array(), $parameters
 
 }
 
-function clear ( $table ) {
+function clear ( $table ) { # clear table function
 
   if ( !parse( $table ) ) { # checking table name for denied symbols
     debug( $lib, "Table name contains denied symbols", 2 ); # debug error
