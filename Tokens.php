@@ -1,5 +1,15 @@
 <?php
 
+/*
+  TOKEN STRUCTURE:
+
+  time*name*password
+
+  time contains date of token
+  name contains login of user
+  password contains hashed user password
+*/
+
 class Token { // api for Tokens
 
   public $database;           # database class
