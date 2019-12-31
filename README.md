@@ -4,9 +4,9 @@ web engine for project Abuse of security
 This API was created for transfering information under web server and qml application ( olso see Abuse of Security qml ).
 For setup this API you need:
 * Web host, which supporting:
-  a. GET request
-  b. SQL databases
-  c. phpmyadmin
+  a) GET request
+  b) SQL databases
+  c) phpmyadmin
 * At least 512 mb hard drive memory on your server
 * Domain
 
