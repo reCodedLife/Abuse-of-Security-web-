@@ -35,6 +35,22 @@ class DataBase {
     $this->connection = mysqli_connect( "localhost", $login, $passw, $name ); # connect to database
   }
 
+  public function createObject( array $param1, array $param2 ) {  # create object for other functions
+
+    $values = array();   # create values json array
+    $object = (object) array(); # init json variable
+
+    for ( $i = 0; $i < count( $param1 ); $i++ ) {
+      $object->name  = $param1[$i];   # set name in new object for parameters
+      $object->value = $param2[$i];   # set value in object
+      $values[] = json_encode( (array) $object );  # add json object to params array
+      $object = null;
+    }
+
+    return $values;  # return json
+
+  }
+
   public function select ( array $values, string $table, array $parameters ) { # select function
 
     $items = "";  # init variable for sql include_oncements in select function ( SELECT var1, var2 ... FROM )
@@ -82,7 +98,7 @@ class DataBase {
     } else $param = ""; # if params items length = 0 set string are empty ( SELECT ... FROM ... ) w/o WHERE function
 
     $reply = mysqli_query ( $this->connection, "select $items from $table $param" ); # exec query
-    return mysqli_fetch_assoc( $reply );  # return responce
+    return $reply;  # return responce
 
   }
 
