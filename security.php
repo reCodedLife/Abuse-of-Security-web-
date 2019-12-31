@@ -44,23 +44,6 @@ class Security {
 
     return $allow; # return allow string
   }
-
-  public function getMetadata( string $token ) { # get metadata from token
-    
-    $array = explode( "*", base64_decode($token) ); // decode token and split to array *WARNING password is heshed!
-
-    if ( !$this->parse( $array[0] ) || !$this->parce( $array[1] ) || !$this->parse( $array[2] ) ) {  # checking token for denied symbols
-      $this->debugger->debug( $this->library, "Token contains denied symbols", 2 );  #debug error
-      return; # stop script
-    }
-
-    $metaData->time = $array[0];  # write timestamp to metadata
-    $metaData->name = $array[1];  # write username to metadata
-    $metaData->pass = $array[2];  # write password to metadata
-
-    return $metaData; # just return metadata
-
-  }
 }
 
 ?>
