@@ -11,17 +11,13 @@ $tokens = new Token();
 
 if ( isset($_GET["name"]) )
   $name = $_GET["name"];
-else {
+else
   $debugger->debug( "access.php", "You must set name", 2 );
-  return;
-}
 
 if ( isset($_GET["pass"]) )
   $pass = $_GET["pass"];
-else {
+else
   $debugger->debug( "access.php", "You must set password", 2 );
-  return;
-}
 
 echo $tokens->generateToken( $name, $pass );
 
