@@ -13,23 +13,33 @@ $database->connect( "id12056522_admin", "8895304025", "id12056522_corporate" ); 
 
 if ( !isset( $_GET["token"] ) )                     # check token exists
   $debugger->debug( $file, "Токен не указан", 2 );  # debug error
-else
+else {
   $metadata = $tokens->getMetadata( $_GET["token"] ); # setup token variable
+  $tokens->checkToken( $metadata );                   # getting metadata from token
+}
 
 if ( isset( $_GET["allow_programms"] ) ) {  # searching for variable
 
-  if ( !$tokens->checkToken( $metadata ) )          # getting metadata from token
-    $debugger->debug( $file, "Токен неверен", 2 );  # debug a error
-
   $reply = $database->select( [], "allow_programms", [] );  # get reply from database
+
   while ( ( $resource = mysqli_fetch_assoc( $reply ) ) ) {  # get all rows
     $object->type = $resource["type"];  # get type of programm
     $object->path = $resource["path"];  # get path of programm
     $object->status = $resource["status"];  # get user status
     $array[] = $object;                 # add json to array
-    $object = null;                     # clear variable
+    $object = (object) array();         # clear variable
   }
 
+} else if ( isset( $_GET["allowed_domains"] ) ) { # searching for variable
+
+  $reply = $database->select( [], "allow_domains", [] );    # get reply from database
+
+  while ( ( $resource = mysqli_fetch_assoc( $reply ) ) ) {  # get all rows
+    $object->domain = $resource["domain"];  # get allowed domain
+    $object->status = $resource["status"];  # get users status
+    $array[] = $object;                     # add json to array
+    $object = (object) array();             # clear variable
+  }
 
 }
 
