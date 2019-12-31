@@ -26,13 +26,13 @@ if ( isset( $_GET["allow_programms"] ) ) {  # searching for variable
     $object->type = $resource["type"];  # get type of programm
     $object->path = $resource["path"];  # get path of programm
     $object->status = $resource["status"];  # get user status
-    $array[] = $object;
-    $object = null;
+    $array[] = $object;                 # add json to array
+    $object = null;                     # clear variable
   }
 
 
 }
 
-echo json_encode($array, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
+echo json_encode($array, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK); # print result
 
 ?>
