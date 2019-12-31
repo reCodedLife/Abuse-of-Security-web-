@@ -9,7 +9,7 @@ $file = "GET-INFO";         # init file name variable
 $array = array();           # create output array
 $object = (object) array(); # create json object
 
-$database->connect( "id12056522_admin", "8895304025", "id12056522_corporate" ); # connect to database
+$database->connect( "db_login", "db_password", "db_name" ); # connect to database
 
 if ( !isset( $_GET["token"] ) )                     # check token exists
   $debugger->debug( $file, "Токен не указан", 2 );  # debug error
