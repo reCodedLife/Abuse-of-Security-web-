@@ -21,7 +21,7 @@ class Token { // api for Tokens
     $this->database = new DataBase(); # init database class
     $this->debugger = new Debugger(); # init debugger class
     $this->security = new Security(); # init security class
-    $this->database->connect( "db_login", "db_password", "db_name" ); # connect to database
+    $this->database->connect( "db_login", "db_password", "db_name" );  # connect to database
   }
 
   function generateToken( string $name, string $pass ) {  # generate token function
