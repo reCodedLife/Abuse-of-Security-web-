@@ -11,6 +11,6 @@ For setup this API you need:
 * Domain
 
 For installing this api you need transfer all php files to your server.
-Then you need to import SQL database (database.sql) file into your datavase.
+Then you need to import SQL database (database.sql) file into your database.
 Next step are configuring database with setting requirements for your buisness.
 After that you need to change sql connections parameters to your options.
